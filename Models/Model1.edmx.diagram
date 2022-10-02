@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a6434512d4b43a6b7824b0a93402e00" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="BloodBankModel.BloodGroup" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodBankModel.District" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodBankModel.Donner" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodBankModel.Requisition" Width="1.5" PointX="8.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BloodBankModel.Thana" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <AssociationConnector Association="BloodBankModel.FK_Donner_BloodGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodBankModel.FK_Requisition_BloodGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodBankModel.FK_Donner_District" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodBankModel.FK_Requisition_District" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodBankModel.FK_Thana_Thana" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodBankModel.FK_Donner_Thana" ManuallyRouted="false" />
+        <AssociationConnector Association="BloodBankModel.FK_Requisition_Thana" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

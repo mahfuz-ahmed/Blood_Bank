@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BloodBankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BloodGroup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictID" />
+    </Key>
+    <Property Name="DistrictID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DistrictName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Donner">
+    <Key>
+      <PropertyRef Name="Donner_ID" />
+    </Key>
+    <Property Name="Donner_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Donner_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Group_ID" Type="int" />
+    <Property Name="District_ID" Type="int" />
+    <Property Name="Thana_ID" Type="int" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastDonationDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Requisition">
+    <Key>
+      <PropertyRef Name="Req_ID" />
+    </Key>
+    <Property Name="Req_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Group_ID" Type="int" />
+    <Property Name="District_ID" Type="int" />
+    <Property Name="Thana_ID" Type="int" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Req_Date" Type="nvarchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Message" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Thana">
+    <Key>
+      <PropertyRef Name="ThanaID" />
+    </Key>
+    <Property Name="ThanaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District_Id" Type="int" />
+    <Property Name="ThanaName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Donner_BloodGroup">
+    <End Role="BloodGroup" Type="Self.BloodGroup" Multiplicity="0..1" />
+    <End Role="Donner" Type="Self.Donner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BloodGroup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Donner">
+        <PropertyRef Name="Group_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donner_District">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Donner" Type="Self.Donner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="Donner">
+        <PropertyRef Name="District_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donner_Thana">
+    <End Role="Thana" Type="Self.Thana" Multiplicity="0..1" />
+    <End Role="Donner" Type="Self.Donner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Thana">
+        <PropertyRef Name="ThanaID" />
+      </Principal>
+      <Dependent Role="Donner">
+        <PropertyRef Name="Thana_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requisition_BloodGroup">
+    <End Role="BloodGroup" Type="Self.BloodGroup" Multiplicity="0..1" />
+    <End Role="Requisition" Type="Self.Requisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BloodGroup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Requisition">
+        <PropertyRef Name="Group_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requisition_District">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Requisition" Type="Self.Requisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="Requisition">
+        <PropertyRef Name="District_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Requisition_Thana">
+    <End Role="Thana" Type="Self.Thana" Multiplicity="0..1" />
+    <End Role="Requisition" Type="Self.Requisition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Thana">
+        <PropertyRef Name="ThanaID" />
+      </Principal>
+      <Dependent Role="Requisition">
+        <PropertyRef Name="Thana_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Thana_Thana">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Thana" Type="Self.Thana" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictID" />
+      </Principal>
+      <Dependent Role="Thana">
+        <PropertyRef Name="District_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BloodBankModelStoreContainer">
+    <EntitySet Name="BloodGroup" EntityType="Self.BloodGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Donner" EntityType="Self.Donner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Requisition" EntityType="Self.Requisition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Thana" EntityType="Self.Thana" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Donner_BloodGroup" Association="Self.FK_Donner_BloodGroup">
+      <End Role="BloodGroup" EntitySet="BloodGroup" />
+      <End Role="Donner" EntitySet="Donner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donner_District" Association="Self.FK_Donner_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Donner" EntitySet="Donner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donner_Thana" Association="Self.FK_Donner_Thana">
+      <End Role="Thana" EntitySet="Thana" />
+      <End Role="Donner" EntitySet="Donner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requisition_BloodGroup" Association="Self.FK_Requisition_BloodGroup">
+      <End Role="BloodGroup" EntitySet="BloodGroup" />
+      <End Role="Requisition" EntitySet="Requisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requisition_District" Association="Self.FK_Requisition_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Requisition" EntitySet="Requisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Requisition_Thana" Association="Self.FK_Requisition_Thana">
+      <End Role="Thana" EntitySet="Thana" />
+      <End Role="Requisition" EntitySet="Requisition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Thana_Thana" Association="Self.FK_Thana_Thana">
+      <End Role="District" EntitySet="District" />
+      <End Role="Thana" EntitySet="Thana" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

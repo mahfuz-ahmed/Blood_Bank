@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BloodBank.Models.Requisition>
+
+@{
+    ViewBag.Title = "CustomHome";
+}
+
+<div class="row breadcrumb">
+    <h2>Welcome To Our Blood Bank</h2>
+    <p>If You need Blood Please Apply Below</p>
+    <p>
+        @Html.ActionLink("Aplly For Blood", "Create", new { area = "" }, new { @class = "btn btn-primary" })
+    </p>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="breadcrumb" style="border:#ff0000 2px solid;box-shadow:0 0 10px #000000">
+                <h4 class="text-danger">@Html.DisplayFor(modelItem => item.Name)</h4>
+                <p> @Html.DisplayNameFor(model => model.Message)</p>
+                <p>
+                    Group:@Html.DisplayNameFor(model => model.BloodGroup.Name) <br />
+                    Cell:  @Html.DisplayNameFor(model => model.ContactNumber) <br />
+                    Email:  @Html.DisplayNameFor(model => model.Email) <br />
+                </p>
+                <button class="btn btn-danger">ReadMore...</button>
+            </div>
+        </div>
+    }
+</div>
